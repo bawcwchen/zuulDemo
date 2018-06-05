@@ -1,0 +1,35 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://node1:8771/eureka/,http://node2:8772/eureka/
+server:
+  port: 8799
+spring:
+  application:
+    name: service-zuul
+zuul:
+  routes:
+   #只是一个id，不一定要是服务名
+   serviceProvider1:
+      path: /helloService/**
+      serviceId: serviceProvider
+
+   local1:
+         path: /local/**
+         url: forward:/
+
+   localForward1:
+        path: /**
+        url: forward:/localForward
+
+   nostripPrefix1:
+            path: /nostripPrefix/**
+            url: forward:/
+            stripPrefix: false
+
+
+serviceprovider: #服务名
+  ribbon:
+  #按响应时间的权重分配请求，时间越短，权重越大，分配到请求的几率越大
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+

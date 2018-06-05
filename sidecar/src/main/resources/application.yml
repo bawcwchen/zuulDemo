@@ -1,0 +1,16 @@
+server:
+  port: 5678
+spring:
+  application:
+    name: sidecar
+
+sidecar:
+  port: 8000
+  health-uri: http://localhost:8000/health.json
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://node1:8771/eureka/,http://node2:8772/eureka/

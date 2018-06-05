@@ -1,0 +1,23 @@
+ zuul:
+ #zuul.<SimpleClassName>.<filterType>.disable
+ #org.springframework.cloud.netflix.zuul.filters.post.SendResponseFilter to disable
+#  SendResponseFilter:
+#                    post:
+#                       disable: true
+
+  routes:
+    api: /api/**
+
+  servlet-path: /zuul
+  #zuul默认集成了ribbon，ribbon是默认是延迟加载的。
+  ribbon:
+      eager-load:
+        enabled: true
+
+error:
+   path: /error
+
+
+
+
+
